@@ -1,4 +1,4 @@
-ffname: CI/CD for Test Flask App
+name: CI/CD for Test Flask App
 
 on:
   push:
