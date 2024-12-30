@@ -57,7 +57,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-          - name: Deploy to Render 
-            run: | 
-              git remote add render https://git.render.com/FatherofElias/CI-CD-Assignments.git 
-              git push render master
+      - name: Deploy to Render 
+        run: | 
+          git remote add render https://git.render.com/FatherofElias/CI-CD-Assignments.git 
+          git push render master
