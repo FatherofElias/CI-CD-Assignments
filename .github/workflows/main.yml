@@ -4,19 +4,18 @@ on:
   push:
     branches:
       - main
-      - feature/tests
+      - feature/tests   # Include feature branch
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     services: 
       postgres:
         image: postgres:latest
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
-          POSTGRES_DB: testdatabase
+          POSTGRES_DB: example-sum-postgres
         ports:
           - 5432:5432
 
@@ -36,7 +35,7 @@ jobs:
 
       - name: Run tests
         env:
-          DATABASE_URL: postgresql://postgres:password@localhost/testdatabase
+          DATABASE_URL: postgresql://example_sum_postgres_2moj_user:lcOZ8DlDUF3Mu2ZnQLm3Xcq9AGnqlJFk@dpg-ctpfkrrqf0us73ebldcg-a.ohio-postgres.render.com/example_sum_postgres_2moj
         run: |
           python -m unittest discover
 
@@ -59,8 +58,5 @@ jobs:
           pip install -r requirements.txt
 
       - name: Deploy to Render
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           # Commands to deploy the app to Render
-
