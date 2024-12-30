@@ -13,8 +13,8 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
+          POSTGRES_USER: example_sum_postgres_2moj_user
+          POSTGRES_PASSWORD: lcOZ8DlDUF3Mu2ZnQLm3Xcq9AGnqlJFk
           POSTGRES_DB: example-sum-postgres
         ports:
           - 5432:5432
