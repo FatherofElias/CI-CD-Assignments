@@ -12,7 +12,26 @@ class SumResult(db.Model):
     b = db.Column(db.Integer, nullable=False)
     result = db.Column(db.Integer, nullable=False)
 
-# New endpoint to retrieve sums filtered by result
+
+@app.route('/sum', methods=['POST'])
+def add_sum():
+    data = request.get_json()
+    a = data['a']
+    b = data['b']
+    result = a + b
+    sum_result = SumResult(a=a, b=b, result=result)
+    db.session.add(sum_result)
+    db.session.commit()
+    return jsonify({"a": a, "b": b, "result": result}), 201
+
+
+@app.route('/sum', methods=['GET'])
+def get_all_sums():
+    sums = SumResult.query.all()
+    result_list = [{"a": sum_result.a, "b": sum_result.b, "result": sum_result.result} for sum_result in sums]
+    return jsonify(result_list), 200
+
+
 @app.route('/sum/result/<int:result_value>', methods=['GET'])
 def get_sums_by_result(result_value):
     sums = SumResult.query.filter_by(result=result_value).all()
@@ -21,6 +40,7 @@ def get_sums_by_result(result_value):
 
     result_list = [{"a": sum_result.a, "b": sum_result.b, "result": sum_result.result} for sum_result in sums]
     return jsonify(result_list), 200
+
 
 if __name__ == '__main__':
     app.run(debug=True)

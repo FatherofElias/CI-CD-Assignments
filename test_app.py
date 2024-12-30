@@ -8,7 +8,7 @@ class TestSumResults(unittest.TestCase):
         app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://example_sum_postgres_2moj_user:lcOZ8DlDUF3Mu2ZnQLm3Xcq9AGnqlJFk@dpg-ctpfkrrqf0us73ebldcg-a.ohio-postgres.render.com/example_sum_postgres_2moj'
         self.app = app.test_client()
 
-        # Create application context
+       
         self.app_context = app.app_context()
         self.app_context.push()
 
@@ -18,7 +18,6 @@ class TestSumResults(unittest.TestCase):
         db.session.remove()
         db.drop_all()
 
-        # Pop the application context
         self.app_context.pop()
 
     def test_get_sums_by_result_valid(self):
