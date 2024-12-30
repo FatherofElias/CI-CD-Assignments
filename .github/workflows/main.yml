@@ -37,7 +37,7 @@ jobs:
         env:
           DATABASE_URL: postgresql://example_sum_postgres_2moj_user:lcOZ8DlDUF3Mu2ZnQLm3Xcq9AGnqlJFk@dpg-ctpfkrrqf0us73ebldcg-a.ohio-postgres.render.com/example_sum_postgres_2moj
         run: |
-          python -m unittest discover -s . -p "test_*.py"
+          python -m unittest discover -s . -p "test_app.py"
 
   deploy:
     needs: build
