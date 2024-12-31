@@ -57,41 +57,27 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-  deploy:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.11'
-
-
-    - name: Install libpq-dev
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y libpq-dev
+      - name: Install libpq-dev
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libpq-dev
 
 
 
-    - name: Create virtual environment
-      run: |
-        python -m venv venv
-        source venv/bin/activate
+      - name: Create virtual environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
 
 
-    - name: Set environment variables
-      run: |
-        echo "DATABASE_URL=postgresql://example_sum_postgres_2moj_user:lcOZ8DlDUF3Mu2ZnQLm3Xcq9AGnqlJFk@dpg-ctpfkrrqf0us73ebldcg-a.ohio-postgres.render.com/example_sum_postgres_2moj" >> $GITHUB_ENV
+      - name: Set environment variables
+        run: |
+          echo "DATABASE_URL=postgresql://example_sum_postgres_2moj_user:lcOZ8DlDUF3Mu2ZnQLm3Xcq9AGnqlJFk@dpg-ctpfkrrqf0us73ebldcg-a.ohio-postgres.render.com/example_sum_postgres_2moj" >> $GITHUB_ENV
 
 
     
-    - name: Deploy to production
-      uses: johnbeynon/render-deploy-action@v0.0.8
-      with:
-        service-id: ${{ secrets.SERVICE_ID }}
-        api-key: ${{ secrets.RENDER_API_KEY }}
+      - name: Deploy to production
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
